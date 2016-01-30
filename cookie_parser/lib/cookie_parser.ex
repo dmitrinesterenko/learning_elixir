@@ -1,0 +1,2 @@
+defmodule CookieParser do
+end
