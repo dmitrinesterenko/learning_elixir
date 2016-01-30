@@ -9,42 +9,23 @@ defmodule BeeNumber do
     Usage:
       BeeNumber.guess(myguess, low..high)
   """
-
-  def guess(myguess, low..high) when myguess == div(high-low,2) do
-    IO.puts "You found me #{myguess}"
+  def guess(mynumber, low..high) when mynumber in low..high do
+    myguess =  makeguess(low..high)
+    IO.puts "#{mynumber}, I guess #{myguess}, #{low}..#{high}"
+    cond do
+      myguess == mynumber -> IO.puts "You found me #{myguess}"
+      myguess > mynumber -> guess(mynumber, low..myguess-1)
+      myguess < mynumber -> guess(mynumber, myguess+1..high)
+    end
   end
 
-  def guess(myguess, low..high) when myguess > div(high - low, 2) do
-    IO.puts "#{low}..#{high}"
-    IO.puts "#{myguess} > #{div(high-low,2)}"
-    IO.puts "#{myguess}, #{(div(high-low,2)+1)}..#{high}"
-    guess(myguess, (div(high - low, 2) + 1)..high)
+  def makeguess(low..high) do
+    low+div((high-low), 2)
   end
-
-  def guess(myguess, low..high) when myguess < div(high - low, 2) do
-    IO.puts "#{low}..#{high}"
-    IO.puts "#{myguess} < #{div(high-low,2)}"
-    IO.puts "#{myguess}, #{low}..#{(div(high-low,2) - 1)}"
-    guess(myguess, low..(div(high-low,2) - 1))
-  end
-
-  def halfway(low..high) do
-    div(high - low, 2)
-  end
-
-  # "Bad bad elixir"
- # def guess(myguess, low..high) when is_string(myguess) do
- #   halfway = div(high - low, 2) + 1
- #   if myguess === halway
- #     IO.puts "You found #{halfway}"
- #   elseif myguess > halfway
- #     guess(myguess, halfway..high)
- #   else
- #     guess(myguess, low..halfway)
- #   end
- # end
 end
+
 
 BeeNumber.guess(1,1..10)
 BeeNumber.guess(2,1..10)
 BeeNumber.guess(7,1..10)
+BeeNumber.guess(273,1..1000)
