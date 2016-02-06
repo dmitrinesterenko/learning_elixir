@@ -18,4 +18,8 @@ defmodule BeeCounter do
   def sum(n) when n > 0, do: n + sum(n-1)
   def sum(n) when n < 0, do: abs(n) + sum(abs(n)-1)
 
+  def fib(0), do: 0
+  def fib(1), do: 1
+  def fib(n) when n > 0, do: fib(n-1) + fib(n-2)
+
 end
