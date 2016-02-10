@@ -1,4 +1,14 @@
 defmodule BeesKnees do
+  @moduledoc ~S"""
+    sum my bees
+    find the biggest bee
+    Apply Caesar's cryptography
+
+    Usage:
+      BeesKnees.sum([1,2,3,1000])
+      BeesKnees.biggest_bee([1,2,1000,-5])
+      BeesKnees.caesar('bees', 13)
+  """
   def sum([]), do: 0
   def sum([head|[]]), do: head + sum([])
   def sum([head|tail]), do: head + sum(tail)
@@ -27,12 +37,28 @@ defmodule BeesKnees do
   end
 
   def caesar([head|[]],n) do
-    IO.puts "last clause #{head} #{n}"
-    head + n
+    trace("last clause #{head} #{n}")
+    [_caesar(head, n)]
   end
 
   def caesar([head|tail], n) do
-    IO.puts "#{head}"
-    (head + n) ++ caesar(tail, n)
+    trace("#{head}")
+   [_caesar(head, n)] ++ caesar(tail, n)
+  end
+
+  def _caesar(letter, n) when letter + n < 122
+  do
+    trace("#{(letter + n)}")
+    letter + n
+  end
+
+  def _caesar(letter, n) when letter + n > 122
+  do
+   trace("#{(letter + n - 26)}")
+   letter + n - 26
+  end
+
+  def trace(message) do
+   IO.puts("Tracing: #{message}")
   end
 end
