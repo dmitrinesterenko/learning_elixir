@@ -61,4 +61,26 @@ defmodule BeesKnees do
   def trace(message) do
    IO.puts("Tracing: #{message}")
   end
+
+  def up_to(from,to) when from == to do
+    trace("Here you are #{to}")
+  end
+
+  def up_to(from,to) when from < to do
+    trace("#{from}")
+    up_to(from+1, to)
+  end
+
+  def up_to(from,to) when from > to do
+    down_to(from,to)
+  end
+
+  def down_to(from,to) when from == to do
+    up_to(from, to)
+  end
+
+  def down_to(from,to) when from > to do
+    trace("#{from}")
+    down_to(from-1, to)
+  end
 end
