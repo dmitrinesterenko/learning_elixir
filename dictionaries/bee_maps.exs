@@ -26,6 +26,20 @@ defmodule BeeMap do
     ["Buzzy", "Woody", "Bumble", "Stingy", "Queen Elizabeth", "Brian"]
   end
 
+  @doc """
+    Make the first bee be sad
+  """
+  def sad_bee([head|_tail]) do
+    Map.put_new(head, :feeling, "sad")
+  end
+
+  @doc """
+    Make the first bee be bad
+  """
+  def bad_bee([head|_tail]) do
+     %{head | name: "Walter"}
+  end
+
   def find_tall_bees(bees, how_tall) do
     for bee = %{height: height} <- bees,
       height > how_tall,
