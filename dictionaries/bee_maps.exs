@@ -46,9 +46,14 @@ defmodule BeeMap do
   def random_bee_name([_head|tail], index, acc) when index > acc do
     random_bee_name(tail, index, acc + 1)
   end
+  @doc """
+    :rand.uniform(n) returns 1...n so I have to start
+    the accumulator from 1
 
+    This is unfortunate off by one here we come
+  """
   def random_bee_name(list, index) do
-    random_bee_name(list, index, 0)
+    random_bee_name(list, index, 1)
   end
 
   def random_bee_name do
